@@ -10,6 +10,6 @@ This is done by selecting the variable "dem" in the data obtained. Once the data
 
 The resulting Fourier Transform shows the frequency structure of the signal (Power Demand). This information can then be used to find other variables and to study the power demand evolution. 
 In the results obtained there is clearly a pattern in the power demand evolution, where demand periods resemble each other. Through the Fourier Transform, the peaks obtained can be studied to find these periods of time. 
-In this project it was found that there is a trend for the power demand every 24h.
+In this project it was found that there is a trend for the power demand mainly every 24h approximately, every 200h and every 12h. These results seem to work according with reality. The first one indicates that there is a periodicity in the power demand every 24h, i.e. every day, which corresponds to the repeated peaks that form the power demand function. The second one indicates that there is a periodicity every 200h, which can be seen in the envelope of the power demand function. Finally, there is a periodicity every 12h, which correspond approximately to the light-time of a day. 
 
 Finally, it is important to note that there is still room for improvement in this project. The API call was made filtering the start_date and end_date, but it did only return 2 days' data. Due to this issue, string arrays were created for all the dates that were required to analyse. This method does not help towards the program optimisation and other methods should be studied to improve it. 
