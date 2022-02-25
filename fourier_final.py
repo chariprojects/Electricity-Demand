@@ -1,8 +1,12 @@
 #Import required libraries
-import requests								#to recall data from API
-import numpy as np 							#to modify the data obtained
-import matplotlib.pyplot as plt 			#to plot the data obtained
-from scipy.fftpack import fft, fftfreq      #to calculate the fast fourier transform (fft)
+#to recall data from API
+import requests	
+#to modify the data obtained
+import numpy as np 
+#to plot the data obtained
+import matplotlib.pyplot as plt 
+#to calculate the fast fourier transform (fft)
+from scipy.fftpack import fft, fftfreq      
 
 def list_of_dates():
 	#Create an array with the required dates
@@ -24,19 +28,27 @@ for i in range(0,30):
 	response = requests.request("GET", url, headers=headers, data=payload)
 
 #Recalling the data
-	r = requests.get(url)									#Getting the data into a variable
-	startstep=0											    #Declaring a variable to decide where to start reading the data
-	dem_index=list()										#Creating a list to fill with the data
-	for i in np.arange(20,181):								#Creating a loop with a numpy array from 0 to 146(number of entries for the required variable)
-		dem_index.append(r.text.find("dem",startstep))		#Appending the "dem"(electricity demand) data entries found in API into the list
-		startstep=r.text.find("dem",startstep)+1			#Modify the start step every loop iteration to read all the data
-
-	dem_index=np.array(dem_index)							#Convert the data obtained from a list into an array
-	dem_value=list()										#Declare a list where the demand results will be put into
+	#Getting the data into a variable
+	r = requests.get(url)
+	#Declaring a variable to decide where to start reading the data
+	startstep=0
+	#Creating a list to fill with the data
+	dem_index=list()
+	#Creating a loop with a numpy array from 0 to 146(number of entries for the required variable)
+	for i in np.arange(20,181):
+		#Appending the "dem"(electricity demand) data entries found in API into the list
+		dem_index.append(r.text.find("dem",startstep))	
+		#Modify the start step every loop iteration to read all the data
+		startstep=r.text.find("dem",startstep)+1
+	#Convert the data obtained from a list into an array	
+	dem_index=np.array(dem_index)
+	#Declare a list where the demand results will be put into
+	dem_value=list()										
 
 
 	for i in np.arange(0,len(dem_index)):
-		dem_value.append(float(r.text[(dem_index+5)[i]:(dem_index+10)[i]]))		#Reading the data results for dem and appending the results into list dem_value
+		#Reading the data results for dem and appending the results into list dem_value
+		dem_value.append(float(r.text[(dem_index+5)[i]:(dem_index+10)[i]]))		
 
 	#Creating an arrange for the time variable of the data
 	t = np.arange(0,800.09,1/6)	
